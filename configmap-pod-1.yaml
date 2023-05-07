@@ -1,22 +1,25 @@
 apiVersion: v1
-kind: pod
+kind: Pod
 metadata:
-  name: nginx-pod-demo-configmap
-  namespace: nginx
+  name: pod-demo-configmap
+  namespace: default
 spec:
   containers:
-    - name: nginx-demo
+    - name: configmap-pod
       image: nginx
       volumeMounts:
-      - name: test-vol
+      - name: demo-configmap
         mountPath: /etc/config-map-data
         readOnly: true
+    - name: busybox
+      image: busybox
+      command: []
   volumes:
-    - name: test-vol
+    - name: demo-configmap
       configMap:
-        name: demo-configmap
+        name: jan-cm
         items:
-        - key: test_file_1.txt
-          path: test_file_1.txt
-        - key: test_file_2.txt
-          path: test_file_2.txt
+        - key: text_file_1.txt
+          path: text_file_1.txt
+        - key: text_file_2.txt
+          path: text_file-2.txt
