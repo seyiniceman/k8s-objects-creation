@@ -1,0 +1,6 @@
+# To create configmap in k8s ; we have two options,
+# 1. Is to use imperative method: this involves passing the creation as a command using kubectl.
+# eg. haven create the test-files, you can use the command:
+# kubectl create configmap <name_of_your_configmap> -n <namespace_you_want_it_to_be> --from-file=<the_file-name>
+
+# You can also create a configmap using the declarative method. this is the most preferred method. This involves writing down your configmap as a yaml file and filling all the necessary contents. you can create from key value form or from files,
