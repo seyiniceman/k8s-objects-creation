@@ -198,7 +198,7 @@ spec:
             # Uncomment the following line to manually specify Kubernetes API server Host
             # If not specified, Dashboard will attempt to auto discover the API server and connect
             # to it. Uncomment only if the default does not work.
-            - --apiserver-host=http://172.31.12.108:8443
+            # - --apiserver-host=http://172.31.12.108:8443
           volumeMounts:
             - name: kubernetes-dashboard-certs
               mountPath: /certs
@@ -226,10 +226,22 @@ spec:
       serviceAccountName: kubernetes-dashboard
       nodeSelector:
         "kubernetes.io/os": linux
-      # Comment the following tolerations if Dashboard must not be deployed on master
       tolerations:
-        - key: node-role.kubernetes.io/master
-          effect: NoSchedule
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
+        - key: "node-role.kubernetes.io/master"
+          operator: "Exists"
+          effect: "NoSchedule"
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: "node-role.kubernetes.io/control-plane"
+                    operator: "Exists"
+                  - key: "node-role.kubernetes.io/master"
+                    operator: "Exists"
 
 ---
 
@@ -293,10 +305,22 @@ spec:
       serviceAccountName: kubernetes-dashboard
       nodeSelector:
         "kubernetes.io/os": linux
-      # Comment the following tolerations if Dashboard must not be deployed on master
       tolerations:
-        - key: node-role.kubernetes.io/master
-          effect: NoSchedule
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
+        - key: "node-role.kubernetes.io/master"
+          operator: "Exists"
+          effect: "NoSchedule"
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: "node-role.kubernetes.io/control-plane"
+                    operator: "Exists"
+                  - key: "node-role.kubernetes.io/master"
+                    operator: "Exists"
       volumes:
         - name: tmp-volume
           emptyDir: {}
