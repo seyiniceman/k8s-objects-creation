@@ -227,9 +227,6 @@ spec:
       nodeSelector:
         "kubernetes.io/os": linux
       tolerations:
-        - key: "node-role.kubernetes.io/control-plane"
-          operator: "Exists"
-          effect: "NoSchedule"
         - key: "node-role.kubernetes.io/master"
           operator: "Exists"
           effect: "NoSchedule"
@@ -238,8 +235,6 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
               - matchExpressions:
-                  - key: "node-role.kubernetes.io/control-plane"
-                    operator: "Exists"
                   - key: "node-role.kubernetes.io/master"
                     operator: "Exists"
 
@@ -306,9 +301,6 @@ spec:
       nodeSelector:
         "kubernetes.io/os": linux
       tolerations:
-        - key: "node-role.kubernetes.io/control-plane"
-          operator: "Exists"
-          effect: "NoSchedule"
         - key: "node-role.kubernetes.io/master"
           operator: "Exists"
           effect: "NoSchedule"
@@ -317,8 +309,6 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
               - matchExpressions:
-                  - key: "node-role.kubernetes.io/control-plane"
-                    operator: "Exists"
                   - key: "node-role.kubernetes.io/master"
                     operator: "Exists"
       volumes:
