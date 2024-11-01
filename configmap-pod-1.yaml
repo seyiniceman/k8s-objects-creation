@@ -11,15 +11,13 @@ spec:
       - name: demo-configmap
         mountPath: /etc/config-map-data
         readOnly: true
-    - name: busybox
-      image: busybox
-      command: []
+
   volumes:
     - name: demo-configmap
       configMap:
-        name: jan-cm
+        name: demo-cm
         items:
         - key: text_file_1.txt
           path: text_file_1.txt
         - key: text_file_2.txt
-          path: text_file-2.txt
+          path: text_file_2.txt
